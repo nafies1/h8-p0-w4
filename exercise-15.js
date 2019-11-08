@@ -6,17 +6,11 @@
   var highScore = {};
   for (var i = 0; i < students.length; i++) {
   	var kelas = students[i].class;
-  	// untuk melihat list key (dalam bentuk array) yang ada dalam object highScore
-  	var daftarKelas = Object.getOwnPropertyNames(highScore);
-  	var status = true;
-  	for (var j = 0; j < daftarKelas.length; j++) {
-  		if (daftarKelas[j] == kelas && students[i].score < highScore[kelas].score) {
-  			status = false;
-  		}
-  	}
-  	if (status) {
-  		highScore[kelas] = {name : students[i].name, score : students[i].score};
-  	}	
+    if (highScore[kelas] === undefined) {
+        highScore[kelas] = {name : students[i].name, score : students[i].score};
+    } else if (students[i].score > highScore[kelas].score){
+      highScore[kelas] = {name : students[i].name, score : students[i].score};
+    }
   }
   return highScore;
 }
